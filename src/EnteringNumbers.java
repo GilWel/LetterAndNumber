@@ -13,7 +13,7 @@ public class EnteringNumbers {
 
         Random random = new Random(100);
         int entNumber;
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i <100; i++) {
             entNumber = random.nextInt(100);
             bufferedWriter.write(String.valueOf(entNumber));
             bufferedWriter.newLine();
@@ -23,13 +23,8 @@ public class EnteringNumbers {
         
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        int[] array = new int[1000];
+        int[] array = new int[100];
         int i = 0;
-        int number = 0;
-        int sum = 0;
-        int maxNumber = 0;
-        int minNumber = 0;
-        int counter = 0;
 
         while (true) {
             String line = bufferedReader.readLine();
@@ -39,32 +34,18 @@ public class EnteringNumbers {
             int outNumber = Integer.parseInt(line);
             array[i] = outNumber;
             i++;
-
-            sum += outNumber;
-
-            if (outNumber > maxNumber) {
-                maxNumber = outNumber;
-
-            }
-            if (outNumber < minNumber) {
-                minNumber = outNumber;
-            }
-            if (outNumber % 2 == 0) {
-                counter++;
-            }
         }
-        for (i = 1; i < array.length - 1; i++) {
+            Calculator calculator = new Calculator(array);
+            int resultSum = calculator.calculateSum();
+            int resultMaxNumber=calculator.calculateMaxNumber();
+            int resultMinNumber=calculator.calculateMinNumber();
+            int resultEven = calculator.calculateEven();
+            int resultCompareValue = calculator.compareValue();
 
-            if (array[i - 1] < array[i] && array[i] < array[i + 1]) {
-                number += 1;
-            }
-        }
-        System.out.println("общая сумма равна " + sum);
-        System.out.println("Максимальное значение равно " + maxNumber);
-        System.out.println("Минимальное значение равно " + minNumber);
-        System.out.println("Количество четных чисел составляет " + counter + " шт");
-        System.out.println(Arrays.toString(array));
-        System.out.println("Больше соседа слева и меньше соседа справа " + number + " чисел");
+
+        Printer printer=new Printer();
+        printer.printResult(resultSum,resultMaxNumber,resultMinNumber,resultEven,resultCompareValue,array);
+
     }
 }
 
